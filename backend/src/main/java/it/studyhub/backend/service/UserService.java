@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import it.studyhub.backend.dto.UserRequest;
 import it.studyhub.backend.entity.User;
 import it.studyhub.backend.repository.UserRepository;
 
@@ -17,6 +18,17 @@ public class UserService {
 
     public List<User> getAllUsers(){
         return userRepository.findAll();
+
+    }
+
+    public User createUser(UserRequest request){
+        User user = new User();
+
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
+        user.setPassword(request.getPassword());
+
+        return userRepository.save(user);
 
     }
     
