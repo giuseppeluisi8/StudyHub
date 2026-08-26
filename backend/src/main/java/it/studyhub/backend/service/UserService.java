@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import it.studyhub.backend.dto.UserRequest;
 import it.studyhub.backend.entity.User;
+import it.studyhub.backend.exception.UserNotFoundException;
 import it.studyhub.backend.repository.UserRepository;
 
 @Service
@@ -19,6 +20,10 @@ public class UserService {
     public List<User> getAllUsers(){
         return userRepository.findAll();
 
+    }
+
+    public User getUserById(Long id){
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Utente non trovato"));
     }
 
     public User createUser(UserRequest request){
