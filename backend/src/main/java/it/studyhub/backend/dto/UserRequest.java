@@ -5,14 +5,14 @@ import jakarta.validation.constraints.NotBlank;
 
 public class UserRequest {
     
-    @NotBlank
+    @NotBlank(message = "Lo username è obbligatorio")
     private String username;
 
-    @Email
-    @NotBlank
+    @Email(message = "L'email non è valida")
+    @NotBlank(message = "L'email è obbligatoria")
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "La password è obbligatoria")
     private String password;
 
     public UserRequest(){

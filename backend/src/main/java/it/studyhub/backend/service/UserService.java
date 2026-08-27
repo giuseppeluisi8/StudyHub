@@ -38,7 +38,7 @@ public class UserService {
     }
 
     public User updateUser(Long id, UserRequest request){
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Utente non trovato"));
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Utente non trovato"));
 
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
@@ -48,7 +48,7 @@ public class UserService {
     }
 
     public void deleteUser(Long id){
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Utente non trovato"));
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Utente non trovato"));
 
         userRepository.delete(user);
     }
