@@ -3,11 +3,8 @@ package it.studyhub.backend.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-//classe per effettuare la registrazione di un utente
-public class UserRequest {
-    
-    @NotBlank(message = "Lo username è obbligatorio")
-    private String username;
+//classe per effettuare il login di un utente
+public class LoginRequest {
 
     @Email(message = "L'email non è valida")
     @NotBlank(message = "L'email è obbligatoria")
@@ -16,16 +13,8 @@ public class UserRequest {
     @NotBlank(message = "La password è obbligatoria")
     private String password;
 
-    public UserRequest(){
+    public LoginRequest(){
 
-    }
-
-    public String getUsername(){
-        return username;
-    }
-
-    public void setUsername(String username){
-        this.username = username;
     }
 
     public String getEmail(){
@@ -43,4 +32,5 @@ public class UserRequest {
     public void setPassword(String password){
         this.password = password;
     }
+    
 }

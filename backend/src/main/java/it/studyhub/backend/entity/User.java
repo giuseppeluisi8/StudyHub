@@ -1,7 +1,7 @@
 package it.studyhub.backend.entity;
 
 import jakarta.persistence.*;
-
+//classe entità del database
 @Entity
 @Table(name  ="users")
 public class User {
@@ -9,6 +9,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
+    
+    @Column(unique = true, nullable = false)
     private String email;
     private String password;
 
