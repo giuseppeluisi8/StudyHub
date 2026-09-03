@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.studyhub.backend.dto.LoginRequest;
-import it.studyhub.backend.entity.User;
+import it.studyhub.backend.dto.LoginResponse;
 import it.studyhub.backend.service.AuthService;
 import jakarta.validation.Valid;
 
@@ -21,7 +21,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public User login(@Valid @RequestBody LoginRequest request) {
+    public LoginResponse login(@Valid @RequestBody LoginRequest request) {
         return authService.login(request);
     }
 
