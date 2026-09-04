@@ -2,7 +2,7 @@ package it.studyhub.backend.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-
+//dati che entrano nell'API
 //classe per effettuare la registrazione di un utente
 public class UserRequest {
     

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.studyhub.backend.dto.UserRequest;
-import it.studyhub.backend.entity.User;
+import it.studyhub.backend.dto.UserResponse;
 import it.studyhub.backend.service.UserService;
 import jakarta.validation.Valid;
 
@@ -26,22 +26,22 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getAllUsers(){
-        return userService.getAllUsers();
+    public List<UserResponse> getAllUsers(){
+        return userService.getAllUsersResponse();
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id){
-        return userService.getUserById(id);
+    public UserResponse getUserById(@PathVariable Long id){
+        return userService.getUserByIdResponse(id);
     }
 
     @PostMapping
-    public User creatUser(@Valid @RequestBody UserRequest request){
+    public UserResponse creatUser(@Valid @RequestBody UserRequest request){
         return userService.createUser(request);
     }
 
     @PutMapping("/{id}")
-    public User updatUser(@PathVariable Long id, @Valid @RequestBody UserRequest request){
+    public UserResponse updatUser(@PathVariable Long id, @Valid @RequestBody UserRequest request){
         return userService.updateUser(id, request);
     }
 
