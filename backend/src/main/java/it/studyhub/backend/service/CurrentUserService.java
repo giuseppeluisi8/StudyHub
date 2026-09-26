@@ -9,8 +9,10 @@ import it.studyhub.backend.entity.User;
 @Service
 public class CurrentUserService {
     public User getCurrentUser() {
+        // Recupera le info sull'utente autenticato
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
+        // Restituisce l'utente che è stato inserito nel securityContext dal JWTAuthentication filter
         return (User) authentication.getPrincipal();
     }
 }

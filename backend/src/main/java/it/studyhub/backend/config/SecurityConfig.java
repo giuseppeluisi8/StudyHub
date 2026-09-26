@@ -2,6 +2,7 @@ package it.studyhub.backend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -36,8 +37,9 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(
-                        auth -> auth.requestMatchers("/users/**", "/auth/login").permitAll().anyRequest()
-                                .authenticated())
+                        auth -> auth.requestMatchers(HttpMethod.POST,"/users").permitAll() //chiunque può creare un nuovo account
+                        .requestMatchers("/auth/login").permitAll() //chiunque può effettuare il login
+                        .anyRequest().authenticated()) //tutte le richieste richiedono un JWT valido
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

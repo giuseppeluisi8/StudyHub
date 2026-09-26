@@ -8,6 +8,7 @@ import it.studyhub.backend.dto.CourseRequest;
 import it.studyhub.backend.dto.CourseResponse;
 import it.studyhub.backend.entity.Course;
 import it.studyhub.backend.entity.User;
+import it.studyhub.backend.exception.CourseNotFoundException;
 import it.studyhub.backend.repository.CourseRepository;
 
 @Service
@@ -41,11 +42,11 @@ public class CourseService {
         // Recupera l'utente autenticato
         User currentUser = currentUserService.getCurrentUser();
         //cerca il corso nel db usanto il suo ID, se il corso non esiste lancia un'eccezione
-        Course course = courseRepository.findById(id).orElseThrow(() -> new RuntimeException("Corso non trovato"));
+        Course course = courseRepository.findById(id).orElseThrow(() -> new CourseNotFoundException("Corso non trovato"));
 
         //Controlla che il corso appartenga all'utente autenticato
         if (!course.getUser().getId().equals(currentUser.getId())) {
-            throw new RuntimeException("Corso non trovato"); //se appartiene ad un altro utente, non permette l'accesso
+            throw new CourseNotFoundException("Corso non trovato"); //se appartiene ad un altro utente, non permette l'accesso
         }
 
         //Trasforma l'entity course in un CourseResponse e lo restitusce al controller
@@ -84,7 +85,7 @@ public class CourseService {
 
         //C<ontrolla che corso è associato all'utente autenticato. se non lo è, la modifica viene impedita
         if (!course.getUser().getId().equals(currentUser.getId())) {
-            throw new RuntimeException("Corso non trovato");
+            throw new CourseNotFoundException("Corso non trovato");
         }
         
         // modifica il nome del corso
@@ -107,7 +108,7 @@ public class CourseService {
 
         // controlla che il corso da eliminare sia associato all'utente autenticato. in caso contrario, l'eliminazione viene impedita
         if (!course.getUser().getId().equals(currentUser.getId())) {
-            throw new RuntimeException("Corso non trovato");
+            throw new CourseNotFoundException("Corso non trovato");
         }
 
         //elimina il corso dal database
