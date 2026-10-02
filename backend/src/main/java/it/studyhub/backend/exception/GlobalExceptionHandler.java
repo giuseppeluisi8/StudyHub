@@ -53,4 +53,12 @@ public class GlobalExceptionHandler {
         return error;
     }
 
+    @ExceptionHandler(MaterialNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Map<String, String> handleMaterialNotFound(MaterialNotFoundException ex){
+        Map<String, String> error = new HashMap<>();
+        error.put("message", ex.getMessage());
+        return error;
+    }
+
 }
