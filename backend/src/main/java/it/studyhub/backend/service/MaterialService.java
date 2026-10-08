@@ -51,7 +51,7 @@ public class MaterialService {
         Material material = materialRepository.findById(id)
                 .orElseThrow(() -> new MaterialNotFoundException("Materiale non trovato"));
 
-        if (!material.getSubject().getCourse().getId().equals(currentUser.getId())) {
+        if (!material.getSubject().getCourse().getUser().getId().equals(currentUser.getId())) {
             throw new MaterialNotFoundException("Materiale non torvato");
         }
 
@@ -114,7 +114,7 @@ public class MaterialService {
         Material material = materialRepository.findById(id)
                 .orElseThrow(() -> new MaterialNotFoundException("Materiale non trovato"));
 
-        if (!material.getSubject().getCourse().getId().equals(currentUser.getId())) {
+        if (!material.getSubject().getCourse().getUser().getId().equals(currentUser.getId())) {
             throw new MaterialNotFoundException("Materiale non trovato");
         }
         materialRepository.delete(material);
